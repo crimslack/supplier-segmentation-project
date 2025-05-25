@@ -1,69 +1,60 @@
-# supplier-segmentation-project
+supplier-segmentation-project
 Supplier segmentation using hierarchical clustering and PCA for data-driven procurement strategy.
-# Tedarikçi Segmentasyonu Projesi
 
-**Performansa dayalı veri analiziyle hiyerarşik kümeleme ve PCA kullanılarak tedarikçi segmentasyonu.**
+📌 Project Summary
+This project applies hierarchical clustering to group suppliers based on performance metrics such as quality, service, cost, and delivery time.
+The clustering results are visualized using Principal Component Analysis (PCA) to aid interpretation.
+The main goal is to support procurement decisions through data-driven analysis.
+(Note: Cluster count can be adjusted for more detailed insights.)
 
----
-
-## 📌 Proje Özeti
-
-Bu proje; kalite, hizmet, maliyet, teslim süresi gibi performans kriterlerine göre tedarikçileri gruplamak amacıyla hiyerarşik kümeleme (hierarchical clustering) yöntemini kullanır.
-Analiz sonuçları PCA (Principal Component Analysis) ile görselleştirilmiştir. Amaç, satın alma kararlarını veri odaklı bir şekilde desteklemektir.
-(Proje,küme sayısı değiştirilerek daha detaylı analiz edilebilir.) 
-
----
-
-## 🗂️ Proje Yapısı
-
-```
+🗂️ Project Structure
+graphql
+Kopyala
+Düzenle
 supplier-segmentation-project/
-├── data/                # Excel veri seti
-├── figures/             # Kümeleme ve PCA görselleri
-├── report/              # Nihai PDF raporu
-├── python/              # Python script dosyaları
-├── requirements.txt     # Kullanılan kütüphaneler
-└── README.md            # Proje açıklama dosyası
-```
+├── data/                # Excel dataset
+├── figures/             # Clustering and PCA visuals
+├── report/              # Final PDF report
+├── python/              # Python script files
+├── requirements.txt     # Required libraries
+└── README.md            # Project description file
 
----
+⚙️ How to Run the Project
+Clone this repository:
 
-## ⚙️ Nasıl Çalıştırılır?
+bash
+Kopyala
+Düzenle
+git clone https://github.com/yourusername/supplier-segmentation-project.git
+cd supplier-segmentation-project
+Install the required libraries:
 
-1. Bu repoyu klonlayın:
-   ```
-   git clone https://github.com/kullaniciadi/supplier-segmentation-project.git
-   cd supplier-segmentation-project
-   ```
+nginx
+Kopyala
+Düzenle
+pip install -r requirements.txt
+Run the analysis:
 
-2. Gerekli kütüphaneleri yükleyin:
-   ```
-   pip install -r requirements.txt
-   ```
+notebooks/supplier_segmentation.ipynb (Jupyter Notebook)
 
-3. Analizi başlatın:
-   - `notebooks/supplier_segmentation.ipynb` (Notebook)
-   - `src/clustering.py` (Python script)
+src/clustering.py (Python script)
 
----
+🛠️ Technologies Used
+Python 3.x
 
-## 🛠️ Kullanılan Teknolojiler
+Pandas, NumPy
 
-- Python 3.x
-- Pandas, NumPy
-- Scikit-learn
-- Matplotlib, Seaborn
-- FPDF
+Scikit-learn
 
----
+Matplotlib, Seaborn
 
-## 📄 Nihai Rapor
+FPDF
 
-Detaylı analiz için PDF raporu inceleyebilirsiniz:
-📁 `report/Supplier_Segmentation_Report.pdf`
+📄 Final Report
+For a detailed analysis, please refer to the PDF report:
+📁 report/Supplier_Segmentation_Report.pdf
 
----
+👩‍💻 Developer
+This project was created as a self-learning exercise. 💖
+—Crimslack
 
-## 👩‍💻 Geliştirici
-
-Bu kod kendimi geliştirmek amacıyla örnek olarak oluşturulmuştur. 💖 –Crimslack
