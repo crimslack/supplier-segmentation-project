@@ -8,83 +8,83 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.decomposition import PCA
 
-
-
-# Excel dosyasını oku
+# Read Excel file
 df = pd.read_excel("supplier_ranking_grades.xlsx", sheet_name="Sheet2")
 
-# İlk 5 satırı görüntüle
+# Display first 5 rows
 print(df.head())
 
-# Veri tiplerini kontrol et
+# Check data types
 print(df.dtypes)
 
-# Eksik veri var mı?
+# Check for missing values
 print(df.isnull().sum())
-# Tüm sütun adlarını sadeleştiriyoruz
+
+# Simplify column names
 df.columns = [
     "supplier", "quality", "quantity", "payment", "service", "reputation",
     "flexibility", "finance", "assets", "employees", "price", "delivery_time", "location"
 ]
 
-# İlk 5 satırı yeniden görelim
+# Display first 5 rows again
 print(df.head())
 df.columns
 
-# "supplier" dışındaki tüm sütunları sayısal değerlere dönüştür (hatalı olanları NaN yap)
+# Convert all columns (except 'supplier') to numeric (non-convertible values become NaN)
 for col in df.columns:
     if col != "supplier":
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
-# Eksik veri sayımını tekrar kontrol edelim
+# Check missing values again
 print(df.isnull().sum())
 
-# Eksik verili satırları çıkaralım
+# Drop rows with missing values
 df_clean = df.dropna()
 
-# Temiz veri boyutunu görelim
-print("Temizlenmiş veri boyutu:", df_clean.shape)
+# Display cleaned dataset shape
+print("Cleaned data shape:", df_clean.shape)
 
-# "supplier" kolonu dışındaki tüm sayısal verileri ölçeklendirelim
+# Scale numerical features (excluding 'supplier')
 features = df_clean.drop(columns=["supplier"])
 scaler = StandardScaler()
 scaled_features = scaler.fit_transform(features)
 
-# Gerekirse Pandas DataFrame'e çevir
+# Convert to Pandas DataFrame if needed
 scaled_df = pd.DataFrame(scaled_features, columns=features.columns)
 
-# Dendrogram çizimi
+# Plot dendrogram
 plt.figure(figsize=(12, 6))
 dendrogram = sch.dendrogram(sch.linkage(scaled_df, method='ward'))
-plt.title("Tedarikçi Segmentasyonu - Dendrogram")
-plt.xlabel("Tedarikçiler")
-plt.ylabel("Mesafe")
+plt.title("Supplier Segmentation - Dendrogram")
+plt.xlabel("Suppliers")
+plt.ylabel("Distance")
 plt.tight_layout()
 plt.show()
 
-# Modeli oluştur
+# Create clustering model
 cluster = AgglomerativeClustering(n_clusters=3, linkage='ward')
 labels = cluster.fit_predict(scaled_df)
 
-# Veriye etiketleri ekle
+# Add cluster labels to the original data
 df_clean["cluster"] = labels
 
-# Küme bazlı ortalamaları hesapla
+# Calculate mean values for each cluster
 cluster_summary = df_clean.groupby("cluster").mean(numeric_only=True)
-print("Küme Ortalamaları:\n", cluster_summary)
+print("Cluster Averages:\n", cluster_summary)
 
-# Küme dağılımı
-print("\nHer kümede kaç tedarikçi var:")
+# Print the number of suppliers in each cluster
+print("\nNumber of suppliers per cluster:")
 print(df_clean["cluster"].value_counts())
 
+# Apply PCA for 2D visualization
 pca = PCA(n_components=2)
 pca_result = pca.fit_transform(scaled_df)
 
 df_clean["pca1"] = pca_result[:, 0]
 df_clean["pca2"] = pca_result[:, 1]
 
-
+# Visualize clusters in 2D PCA space
 plt.figure(figsize=(8,6))
 sns.scatterplot(data=df_clean, x="pca1", y="pca2", hue="cluster", palette="Set2")
-plt.title("Tedarikçilerin Kümeleme Sonucu (2D PCA)")
+plt.title("Supplier Clustering Result (2D PCA)")
 plt.show()
