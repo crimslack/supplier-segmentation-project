@@ -10,6 +10,7 @@ Supplier segmentation using hierarchical clustering and PCA for data-driven proc
 
 Bu proje; kalite, hizmet, maliyet, teslim süresi gibi performans kriterlerine göre tedarikçileri gruplamak amacıyla hiyerarşik kümeleme (hierarchical clustering) yöntemini kullanır.
 Analiz sonuçları PCA (Principal Component Analysis) ile görselleştirilmiştir. Amaç, satın alma kararlarını veri odaklı bir şekilde desteklemektir.
+(Proje,küme sayısı değiştirilerek daha detaylı analiz edilebilir.) 
 
 ---
 
@@ -19,9 +20,8 @@ Analiz sonuçları PCA (Principal Component Analysis) ile görselleştirilmişti
 supplier-segmentation-project/
 ├── data/                # Excel veri seti
 ├── figures/             # Kümeleme ve PCA görselleri
-├── notebooks/           # Jupyter Notebook (analiz adımları)
 ├── report/              # Nihai PDF raporu
-├── src/                 # Python script dosyaları
+├── python/              # Python script dosyaları
 ├── requirements.txt     # Kullanılan kütüphaneler
 └── README.md            # Proje açıklama dosyası
 ```
